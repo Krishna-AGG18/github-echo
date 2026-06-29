@@ -1,63 +1,16 @@
-# GitHub Echo ✨
+# React + Vite
 
-**Turn your GitHub journey into a beautiful interactive story.**
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-A modern React web app that transforms your GitHub activity into an engaging visual story, timeline, and time capsule.
+Currently, two official plugins are available:
 
-![GitHub Echo](https://via.placeholder.com/800x400?text=GitHub+Echo+Banner) <!-- Replace with your actual screenshot later -->
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
 
-## 🌟 Features
+## React Compiler
 
-- **Search Any GitHub User** – Instantly analyze any public profile
-- **Interactive Story Timeline** – Your coding journey told like a story
-- **Beautiful Visualizations** – Contribution heatmap, language stats, repo insights
-- **Time Capsule Mode** – Freeze and compare your GitHub progress over time
-- **Responsive & Modern UI** – Built with React + Tailwind CSS
-- **Shareable Snapshots** – Export your profile story as PDF/image
+The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
 
-## 🚀 Live Demo
+## Expanding the ESLint configuration
 
-[View Live Demo](https://your-deployed-link.vercel.app) <!-- Add after deployment -->
-
-## 🛠️ Tech Stack
-
-- **Frontend**: React.js, Vite
-- **Styling**: Tailwind CSS + Framer Motion
-- **Charts**: Recharts / Chart.js
-- **API**: GitHub REST API + GraphQL
-- **State Management**: Zustand / Context API
-- **Animations**: Framer Motion
-
-## 📸 Screenshots
-
-![Screenshot 1](path-to-screenshot1.png)
-![Screenshot 2](path-to-screenshot2.png)
-
-## ✨ Key Highlights
-
-- Clean and intuitive user interface
-- Real-time GitHub data fetching
-- Smooth animations and transitions
-- Mobile responsive design
-- Fast and optimized performance
-
-## 🏃‍♂️ Quick Start
-
-### Prerequisites
-- Node.js (v18+)
-- Git
-
-### Installation
-
-```bash
-# Clone the repository
-git clone https://github.com/Krishna-AGG18/github-echo.git
-
-# Go into the project directory
-cd github-echo
-
-# Install dependencies
-npm install
-
-# Start the development server
-npm run dev
+If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
