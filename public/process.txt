@@ -1,0 +1,6 @@
+Setup: Initialize React app, add Tailwind, and GitHub API token input (for higher limits).
+API Layer: Functions to fetch user data, repos, events, contributions.
+Core UI: Search bar → Profile card → Tabs (Overview, Story, Visuals, Capsule).
+Timeline Logic: Sort events by date and group into narrative sections.
+Visuals & Animations: Implement charts and scroll-triggered animations.
+Polish: Add loading states, error handling (rate limits, invalid users), and share functionality.
