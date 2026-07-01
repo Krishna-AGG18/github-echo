@@ -33,14 +33,14 @@ const SearchBar = ({ setUser, setLoading, setError }) => {
     <div className="w-full group">
       <form onSubmit={handleSearch} className="relative">
         {/* Glow effect behind the search bar */}
-        <div className="absolute -inset-1 bg-gradient-to-r from-purple-600/30 to-blue-600/30 rounded-3xl blur-md opacity-50 group-hover:opacity-100 transition duration-500" />
+        <div className="absolute -inset-1 bg-gradient-to-r from-zinc-600/30 to-blue-600/30 rounded-3xl blur-md opacity-50 group-hover:opacity-100 transition duration-500" />
         
-        <div className="relative flex items-center bg-gray-900/80 backdrop-blur-xl border border-white/10 rounded-3xl p-2 shadow-2xl transition-all duration-300 group-hover:border-white/20 group-hover:bg-gray-900/90">
+        <div className="relative flex items-center bg-zinc-900/80 backdrop-blur-xl border border-white/10 rounded-3xl p-2 shadow-2xl transition-all duration-300 group-hover:border-white/20 group-hover:bg-gray-900/90">
           <div className="pl-4 pr-2 text-gray-400">
             <Search className="w-6 h-6" />
           </div>
           
-          <input
+          <input  
             type="text"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
