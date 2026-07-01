@@ -412,7 +412,7 @@ const ProfileCardComponent = ({
   return (
     <div
       ref={wrapRef}
-      className={`relative touch-none ${className}`.trim()}
+      className={`relative touch-none w-full h-full ${className}`.trim()}
       style={{ perspective: '500px', transform: 'translate3d(0, 0, 0.1px)', ...cardStyle }}
     >
       {behindGlowEnabled && (
@@ -425,13 +425,10 @@ const ProfileCardComponent = ({
           }}
         />
       )}
-      <div ref={shellRef} className="relative z-[1] group">
+      <div ref={shellRef} className="relative z-[1] group w-full h-full">
         <section
-          className="grid relative overflow-hidden backface-hidden"
+          className="grid relative overflow-hidden backface-hidden w-full h-[80svh] max-h-[540px] aspect-[0.718] lg:h-full lg:max-h-none lg:aspect-auto"
           style={{
-            height: '80svh',
-            maxHeight: '540px',
-            aspectRatio: '0.718',
             borderRadius: cardRadius,
             backgroundBlendMode: 'color-dodge, normal, normal, normal',
             boxShadow:
@@ -470,135 +467,130 @@ const ProfileCardComponent = ({
             {/* Glare layer */}
             <div style={glareStyle} />
 
-            {/* Avatar content */}
-            <div
-              className="overflow-visible backface-hidden"
-              style={{
-                mixBlendMode: 'luminosity',
-                transform: 'translateZ(2px)',
-                gridArea: '1 / -1',
-                borderRadius: cardRadius,
-                pointerEvents: 'none'
-              }}
-            >
-              <img
-                className="w-full absolute left-1/2 bottom-[-1px] backface-hidden will-change-transform transition-transform duration-[120ms] ease-out"
-                src={avatarUrl}
-                alt={`${name || 'User'} avatar`}
-                loading="lazy"
+            {/* Layout Container for Text and Avatar */}
+            <div className="absolute inset-0 w-full h-full flex flex-col pointer-events-none z-0" style={{ gridArea: '1 / -1' }}>
+              {/* Details content */}
+              <div
+                className="flex-none flex flex-col items-center justify-start relative z-[5]"
                 style={{
-                  transformOrigin: '50% 100%',
-                  transform:
-                    'translateX(calc(-50% + (var(--pointer-from-left) - 0.5) * 6px)) translateZ(0) scaleY(calc(1 + (var(--pointer-from-top) - 0.5) * 0.02)) scaleX(calc(1 + (var(--pointer-from-left) - 0.5) * 0.01))',
-                  borderRadius: cardRadius
+                  paddingTop: '3em',
+                  transform: 'translate3d(calc(var(--pointer-from-left) * -6px + 3px), calc(var(--pointer-from-top) * -6px + 3px), 0.1px)',
+                  mixBlendMode: 'luminosity'
                 }}
-                onError={e => {
-                  const t = e.target;
-                  t.style.display = 'none';
-                }}
-              />
-              {showUserInfo && (
-                <div
-                  className="absolute z-[2] flex items-center justify-between backdrop-blur-[30px] border border-white/10 pointer-events-auto"
-                  style={{
-                    '--ui-inset': '20px',
-                    '--ui-radius-bias': '6px',
-                    bottom: 'var(--ui-inset)',
-                    left: 'var(--ui-inset)',
-                    right: 'var(--ui-inset)',
-                    background: 'rgba(255, 255, 255, 0.1)',
-                    borderRadius: 'calc(max(0px, var(--card-radius) - var(--ui-inset) + var(--ui-radius-bias)))',
-                    padding: '12px 14px'
-                  }}
-                >
-                  <div className="flex items-center gap-3">
-                    <div
-                      className="rounded-full overflow-hidden border border-white/10 flex-shrink-0"
-                      style={{ width: '48px', height: '48px' }}
-                    >
-                      <img
-                        className="w-full h-full object-cover rounded-full"
-                        src={miniAvatarUrl || avatarUrl}
-                        alt={`${name || 'User'} mini avatar`}
-                        loading="lazy"
-                        style={{ display: 'block', gridArea: 'auto', borderRadius: '50%', pointerEvents: 'auto' }}
-                        onError={e => {
-                          const t = e.target;
-                          t.style.opacity = '0.5';
-                          t.src = avatarUrl;
-                        }}
-                      />
-                    </div>
-                    <div className="flex flex-col items-start gap-1.5">
-                      <div className="text-sm font-medium text-white/90 leading-none">@{handle}</div>
-                      <div className="text-sm text-white/70 leading-none">{status}</div>
-                    </div>
-                  </div>
-                  <button
-                    className="border border-white/10 rounded-lg px-4 py-3 text-xs font-semibold text-white/90 cursor-pointer backdrop-blur-[10px] transition-all duration-200 ease-out hover:border-white/40 hover:-translate-y-px"
-                    onClick={handleContactClick}
-                    style={{ pointerEvents: 'auto', display: 'block', gridArea: 'auto', borderRadius: '8px' }}
-                    type="button"
-                    aria-label={`Contact ${name || 'user'}`}
-                  >
-                    {contactText}
-                  </button>
-                </div>
-              )}
-            </div>
-
-            {/* Details content */}
-            <div
-              className="max-h-full overflow-hidden text-center relative z-[5]"
-              style={{
-                transform:
-                  'translate3d(calc(var(--pointer-from-left) * -6px + 3px), calc(var(--pointer-from-top) * -6px + 3px), 0.1px)',
-                mixBlendMode: 'luminosity',
-                gridArea: '1 / -1',
-                borderRadius: cardRadius,
-                pointerEvents: 'none'
-              }}
-            >
-              <div className="w-full absolute flex flex-col px-8" style={{ top: '2em', display: 'flex', gridArea: 'auto' }}>
+              >
                 <h3
-                  className="font-bold m-0 whitespace-normal break-words leading-tight text-center"
+                  className="font-semibold m-0 px-4 text-center"
                   style={{
-                    fontSize: 'min(4.5svh, 2.2em)',
+                    fontSize: 'min(5svh, 3em)',
+                    lineHeight: '1.1',
+                    textWrap: 'balance',
                     backgroundImage: 'linear-gradient(to bottom, #fff, #6f6fbe)',
                     backgroundSize: '1em 1.5em',
                     WebkitTextFillColor: 'transparent',
                     backgroundClip: 'text',
                     WebkitBackgroundClip: 'text',
                     display: 'block',
-                    gridArea: 'auto',
-                    borderRadius: '0',
                     pointerEvents: 'auto'
                   }}
                 >
                   {name}
                 </h3>
                 <p
-                  className="font-medium whitespace-normal mx-auto w-full max-w-[95%] break-words mt-1 leading-[1.4] text-center"
+                  className="font-semibold mx-auto w-full px-4 text-center"
                   style={{
-                    position: 'relative',
-                    top: '-4px',
-                    fontSize: '13.5px',
-                    margin: '0 auto',
+                    marginTop: '4px',
+                    fontSize: '16px',
+                    textWrap: 'balance',
                     backgroundImage: 'linear-gradient(to bottom, #fff, #4a4ac0)',
                     backgroundSize: '1em 1.5em',
                     WebkitTextFillColor: 'transparent',
                     backgroundClip: 'text',
                     WebkitBackgroundClip: 'text',
                     display: 'block',
-                    gridArea: 'auto',
-                    borderRadius: '0',
                     pointerEvents: 'auto'
                   }}
                 >
                   {title}
                 </p>
               </div>
+
+              {/* Avatar content */}
+              <div
+                className="flex-auto mt-4 overflow-visible backface-hidden w-full relative z-0"
+                style={{
+                  mixBlendMode: 'luminosity',
+                  transform: 'translateZ(2px)',
+                  pointerEvents: 'none'
+                }}
+              >
+                <img
+                  className="w-full h-full object-cover object-top backface-hidden will-change-transform transition-transform duration-[120ms] ease-out block"
+                  src={avatarUrl}
+                  alt={`${name || 'User'} avatar`}
+                  loading="lazy"
+                  style={{
+                    transformOrigin: '50% 100%',
+                    transform:
+                      'translateX(calc((var(--pointer-from-left) - 0.5) * 6px)) translateY(1px) translateZ(0) scaleY(calc(1 + (var(--pointer-from-top) - 0.5) * 0.02)) scaleX(calc(1 + (var(--pointer-from-left) - 0.5) * 0.01))',
+                    borderRadius: cardRadius
+                  }}
+                  onError={e => {
+                    const t = e.target;
+                    t.style.display = 'none';
+                  }}
+                />
+              </div>
             </div>
+
+            {/* User Info (fixed bottom) */}
+            {showUserInfo && (
+              <div
+                className="absolute z-[2] flex items-center justify-between backdrop-blur-[30px] border border-white/10 pointer-events-auto"
+                style={{
+                  '--ui-inset': '20px',
+                  '--ui-radius-bias': '6px',
+                  bottom: 'var(--ui-inset)',
+                  left: 'var(--ui-inset)',
+                  right: 'var(--ui-inset)',
+                  background: 'rgba(255, 255, 255, 0.1)',
+                  borderRadius: 'calc(max(0px, var(--card-radius) - var(--ui-inset) + var(--ui-radius-bias)))',
+                  padding: '12px 14px'
+                }}
+              >
+                <div className="flex items-center gap-3">
+                  <div
+                    className="rounded-full overflow-hidden border border-white/10 flex-shrink-0"
+                    style={{ width: '48px', height: '48px' }}
+                  >
+                    <img
+                      className="w-full h-full object-cover rounded-full"
+                      src={miniAvatarUrl || avatarUrl}
+                      alt={`${name || 'User'} mini avatar`}
+                      loading="lazy"
+                      style={{ display: 'block', gridArea: 'auto', borderRadius: '50%', pointerEvents: 'auto' }}
+                      onError={e => {
+                        const t = e.target;
+                        t.style.opacity = '0.5';
+                        t.src = avatarUrl;
+                      }}
+                    />
+                  </div>
+                  <div className="flex flex-col items-start gap-1.5">
+                    <div className="text-sm font-medium text-white/90 leading-none">@{handle}</div>
+                    <div className="text-sm text-white/70 leading-none">{status}</div>
+                  </div>
+                </div>
+                <button
+                  className="border border-white/10 rounded-lg px-4 py-3 text-xs font-semibold text-white/90 cursor-pointer backdrop-blur-[10px] transition-all duration-200 ease-out hover:border-white/40 hover:-translate-y-px"
+                  onClick={handleContactClick}
+                  style={{ pointerEvents: 'auto', display: 'block', gridArea: 'auto', borderRadius: '8px' }}
+                  type="button"
+                  aria-label={`Contact ${name || 'user'}`}
+                >
+                  {contactText}
+                </button>
+              </div>
+            )}
           </div>
         </section>
       </div>
